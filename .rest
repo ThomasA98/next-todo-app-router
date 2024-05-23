@@ -1,0 +1,13 @@
+POST http://localhost:3000/api/todos HTTP/1.1
+
+{
+    "description": "Esta es la descripcion de prueba"
+}
+
+###
+PUT http://localhost:3000/api/todos/36dc07cd-6f2c-440d-99d2-c60c7272ca45 HTTP/1.1
+
+{
+    "description": "Esta es la descripcion de prueba del PUT",
+    "complete": false
+}
