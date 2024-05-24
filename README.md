@@ -10,7 +10,10 @@ docker compose up -d
 ```
 pnpm i
 ```
-3. Prisma commands
+
+3. crear un .env en base a .env.template y llenar las variables de entorno
+
+4. Prisma commands
 ```
 pnpm prisma init
 
@@ -18,9 +21,6 @@ pnpm prisma migrate <migration name>
 
 pnpm prisma generate
 ```
-
-4. crear un .env en base a .env.template y llenar las variables de entorno
-
 
 5. dev server
 ```
