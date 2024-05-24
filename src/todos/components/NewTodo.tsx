@@ -3,6 +3,7 @@ import { FormEvent, useState } from "react"
 import { useRouter } from "next/navigation"
 import { IoTrashOutline } from "react-icons/io5"
 import * as todoApi from '@/todos/helpers/todos'
+import { addTodo, deleteCompleted } from "../actions/todo-actions"
 
 const MIN_DESCRIPTION_PERMITTED = 5
 
@@ -16,17 +17,14 @@ export const NewTodo = () => {
         event.preventDefault()
         if (description.length < MIN_DESCRIPTION_PERMITTED) return;
 
-        const newTodo = await todoApi.createTodo(description)
+        const newTodo = await addTodo(description)
 
-        router.refresh()
         setDescription('')
         return newTodo
     }
 
     const onDeleteCompleted = async () => {
-        await todoApi.deleteCompleted()
-
-        router.refresh()
+        await deleteCompleted()
     }
 
     return (

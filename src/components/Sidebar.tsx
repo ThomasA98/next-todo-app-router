@@ -3,15 +3,19 @@ import { CiBookmarkCheck, CiLogout } from "react-icons/ci"
 import { SidebarItem, SidebarItemProps } from "./"
 
 const itemsMenu: SidebarItemProps[] = [
-    {
-        href: '/dashboard',
-        label: 'Dashboard',
-        icon: <CiBookmarkCheck size={30} />
-    },{
-        href: '/dashboard/rest-todos',
-        label: 'Rest TODOs',
-        icon: <CiBookmarkCheck size={30} />
-    },
+  {
+    href: '/dashboard',
+    label: 'Dashboard',
+    icon: <CiBookmarkCheck size={30} />
+  },{
+    href: '/dashboard/rest-todos',
+    label: 'Rest TODOs',
+    icon: <CiBookmarkCheck size={30} />
+  },{
+    href: '/dashboard/server-todos',
+    label: 'Server TODOs',
+    icon: <CiBookmarkCheck size={30} />
+  },
 ]
 
 export const Sidebar = () => {

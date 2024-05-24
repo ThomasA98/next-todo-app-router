@@ -1,8 +1,9 @@
 'use client'
 import { Todo } from "@prisma/client"
+// import * as todoApi from '@/todos/helpers/todos'
+// import { useRouter } from "next/navigation"
 import { TodoItem } from "./TodoItem"
-import * as todoApi from '@/todos/helpers/todos'
-import { useRouter } from "next/navigation"
+import { toggleTodo } from "../actions/todo-actions"
 
 export interface TodosGridProps {
     todos?: Todo[]
@@ -10,13 +11,13 @@ export interface TodosGridProps {
 
 export const TodosGrid: React.FC<TodosGridProps> = ({ todos = [] }) => {
 
-    const router = useRouter()
+    // const router = useRouter()
 
-    const toggleTodo = async (id: string, complete: boolean) => {
-        const updatedTodo = await todoApi.updateTodo(id, complete)
-        router.refresh()
-        return updatedTodo
-    }
+    // const toggleTodo = async (id: string, complete: boolean) => {
+    //     const updatedTodo = await todoApi.updateTodo(id, complete)
+    //     router.refresh()
+    //     return updatedTodo
+    // }
 
   return (
     <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
