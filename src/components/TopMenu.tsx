@@ -1,6 +1,25 @@
-import { CiBellOn, CiChat1, CiMenuBurger, CiSearch } from "react-icons/ci"
+import { cookies } from "next/headers"
+import Link from "next/link"
+import { CiChat1, CiMenuBurger, CiSearch, CiShoppingBasket } from "react-icons/ci"
+
+const getTotalCount = (cart: { [id: string]: number }): number => {
+    return Object.values(cart).reduce((acc, curr) => {
+
+        const currentNumber = Number(curr)
+
+        if (isNaN(currentNumber)) return acc
+
+        return acc + currentNumber
+    }, 0)
+}
 
 export const TopMenu = () => {
+
+    const cookieStore = cookies()
+    const cart = JSON.parse(cookieStore.get('cart')?.value ?? '{}')
+
+    const totalItems = getTotalCount(cart)
+
     return (
         <div className="sticky z-10 top-0 h-16 border-b bg-white lg:py-2.5">
 
@@ -26,9 +45,12 @@ export const TopMenu = () => {
                     <button className="flex items-center justify-center w-10 h-10 rounded-xl border bg-gray-100 focus:bg-gray-100 active:bg-gray-200">
                         <CiChat1 size={25} />
                     </button>
-                    <button className="flex items-center justify-center w-10 h-10 rounded-xl border bg-gray-100 focus:bg-gray-100 active:bg-gray-200">
-                        <CiBellOn size={25} />
-                    </button>
+                    <Link href={ '/dashboard/cart' } className="relative flex items-center justify-center px-2 h-10 rounded-xl border bg-gray-100 focus:bg-gray-100 active:bg-gray-200">
+                        <CiShoppingBasket size={25} />
+                        {
+                            totalItems > 0 && <span className="absolute text-center -top-1 -left-1 bg-cyan-300 rounded-full text-cyan-900 w-5 h-5 text-sm mr-2">{ totalItems }</span>
+                        }
+                    </Link>
                 </div>
             </div>
         </div>

@@ -15,6 +15,14 @@ const itemsMenu: SidebarItemProps[] = [
     href: '/dashboard/server-todos',
     label: 'Server TODOs',
     icon: <CiBookmarkCheck size={30} />
+  },{
+    href: '/dashboard/cookies',
+    label: 'Cookies',
+    icon: <CiBookmarkCheck size={30} />
+  },{
+    href: '/dashboard/products',
+    label: 'Products',
+    icon: <CiBookmarkCheck size={30} />
   },
 ]
 
