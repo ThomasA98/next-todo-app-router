@@ -28,3 +28,8 @@ pnpm dev
 ```
 
 6. llenar base de datos local de dasarrollo: Peticion GET a /api/seed
+
+7. Usuario default
+
+__email__: defaultUser@google.com
+__password__: 123456

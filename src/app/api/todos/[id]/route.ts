@@ -1,3 +1,4 @@
+import { getUserSessionServer } from '@/auth'
 import prisma from '@/lib/prisma'
 import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library'
 import { NextResponse, NextRequest } from 'next/server'
@@ -34,12 +35,15 @@ const putSchema = Yup.object({
 })
 
 export async function PUT(request: Request, { params }: Segments) {
+    const user = await getUserSessionServer()
+
+    if (!user) return NextResponse.json('Unauthorized', { status: 401 })
     try {
         const { id } = params
         const { complete, description } = await putSchema.validate(await request.json())
 
         const todo = await prisma.todo.update({
-            where: { id },
+            where: { id, userId: user.id },
             data: { complete, description }
         })
 

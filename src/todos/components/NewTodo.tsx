@@ -10,16 +10,16 @@ const MIN_DESCRIPTION_PERMITTED = 5
 export const NewTodo = () => {
 
     const [ description, setDescription ] = useState('')
-
     const router = useRouter()
 
     const onSubmit = async (event: FormEvent) => {
         event.preventDefault()
         if (description.length < MIN_DESCRIPTION_PERMITTED) return;
 
-        const newTodo = await addTodo(description)
+        const newTodo = await todoApi.createTodo(description)
 
         setDescription('')
+        router.refresh()
         return newTodo
     }
 

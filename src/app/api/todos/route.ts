@@ -1,6 +1,7 @@
 import { NextResponse, NextRequest } from 'next/server'
 import prisma from '@/lib/prisma'
 import * as Yup from 'yup'
+import { getUserSessionServer } from '@/auth'
 
 export async function GET(request: Request) {
     const { searchParams } = new URL(request.url)
@@ -29,11 +30,16 @@ const postSchema = Yup.object({
 })
 
 export async function POST(request: Request) {
+
+    const user = await getUserSessionServer()
+
+    if (!user) return NextResponse.json('Unauthorized', { status: 401 })
+
     try {
         const { complete, description } = await postSchema.validate(await request.json())
 
         const todo = await prisma.todo.create({
-            data: { complete, description }
+            data: { complete, description, userId: user.id! }
         })
 
         return NextResponse.json(todo)
@@ -43,10 +49,15 @@ export async function POST(request: Request) {
 }
 
 export async function DELETE() {
+    const user = await getUserSessionServer()
+
+    if (!user) return NextResponse.json('Unauthorized', { status: 401 })
+
     try {
         await prisma.todo.deleteMany({
             where: {
                 complete: true,
+                userId: user.id
             }
         })
 
